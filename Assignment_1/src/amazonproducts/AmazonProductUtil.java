@@ -1,5 +1,6 @@
 package amazonproducts;
 public class AmazonProductUtil{
+	private static int NUMCOLS=10;
 
 	public static float convertStrToFloat(String str) {
 		//if there is a special charecter then we substring it if there isnt then parse the entire str
@@ -10,36 +11,42 @@ public class AmazonProductUtil{
             return 0.0f;
         }
 	}
-	public static String[] lineReader(String line) {
-        String[] result = new String[10];
-        int index = 0;
-        int start = 0;
-        int end;
+	public String[] lineReader(String string) {
+	    String[] str = new String[NUMCOLS];
+	    int index = 0;
+	    final char chComma = ',';
+	    final char chQuotes = '"';
+	    int start = 0;
+	    boolean insideQuotes = false;
+	    StringBuilder currentField = new StringBuilder();
 
-        while (start < line.length()) {
-            if (line.charAt(start) == '"') {
+	    for (int i = 0; i < string.length(); i++) {
+	        char currentChar = string.charAt(i);
 
-                start++;
-                end = line.indexOf('"', start);
-            } else {
-                end = line.indexOf(',', start);
-            }
-            if (end == -1) {
-                end = line.length();
-            }
+	        if (currentChar == chQuotes) {
+	            if (i > 0 && string.charAt(i - 1) == chQuotes) {
 
-            String value = line.substring(start, end).trim();
-            result[index] = value;
-            index++;
+	                currentField.append(currentChar);
+	                i++; 
+	            } else {
+	                insideQuotes = !insideQuotes;
+	            }
+	        } else if (currentChar == chComma && !insideQuotes) {
+	            str[index++] = currentField.toString().trim();
+	            currentField.setLength(0);
+	        } else {
+	            currentField.append(currentChar);
+	        }
+	    }
 
-            if (end < line.length() && line.charAt(end) == '"') {
-                start = end + 2;
-            } else {
-                start = end + 1;
-            }
-        }
-        return result;
-    }
+	    if (currentField.length() > 0) {
+	        str[index++] = currentField.toString().trim();
+	    }
+
+	    return str;
+	}
+
+
 }
 
 		

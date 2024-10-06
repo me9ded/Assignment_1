@@ -35,9 +35,11 @@ public class AmazonProductList extends AmazonProductUtil{
 
     public void saveList(String csvName) throws AmazonProductException{
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvName))) {
-        	 
-            writer.write(String.join(",", AmazonProduct.getTitle()));
-            writer.newLine();
+            if (title != null) {
+                writer.write(String.join(",", title));
+                writer.newLine();
+            }
+
 
  
             for (AmazonProduct product : bestsellers) {
@@ -54,6 +56,10 @@ public class AmazonProductList extends AmazonProductUtil{
             throw new AmazonProductException("There was an error in saving the file.");
         }
     }
+
+
+
+
 
     public void printList(){
         for (AmazonProduct product : bestsellers) {
@@ -94,5 +100,8 @@ public class AmazonProductList extends AmazonProductUtil{
     public int size() {
     	return bestsellers.size();
     	
+    }
+    public ArrayList<AmazonProduct> getBestSellers() {
+    	return bestsellers;
     }
 }

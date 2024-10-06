@@ -1,5 +1,6 @@
 package amazonproducts;
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -94,7 +95,7 @@ public class AmazonProductManager {
 
 
     public static void addProduct() throws AmazonProductException {
-    	 int id = getInt("ID: ");
+    	 	int id = getInt("ID: ");
     	    String name = getString("Name: ");
     	    AmazonProductCategory category = new AmazonProductCategory(getString("Category: "));
     	    AmazonProductSubCategory subCategory = new AmazonProductSubCategory(getString("Sub-category: "), category);
@@ -159,9 +160,59 @@ public class AmazonProductManager {
     }
 
       public static void saveProductList() throws AmazonProductException {
-    	productList.saveList("null");
-        System.out.println("Saving the product list...");
-    }
+    	  /*try (BufferedWriter writer = new BufferedWriter(new FileWriter("productList.csv"))) {
+    	        writer.write("ID,Name,Category,SubCategory,ImageURL,Link,Rating,NumberOfRatings,DiscountPrice,ActualPrice");
+    	        writer.newLine(); 
+    	        
+    	        for () {
+    	            writer.write(String.join(",", 
+    	                String.valueOf(product.getId()),
+    	                product.getName(),
+    	                product.getMain_category().getCategory(),
+    	                product.getSub_category().getSubCategory(),
+    	                product.getImageURL(),
+    	                product.getLink(),
+    	                String.valueOf(product.getRating()),
+    	                String.valueOf(product.getNRatings()),
+    	                String.valueOf(product.getDiscountPrice()),
+    	                String.valueOf(product.getActualPrice())
+    	            ));
+    	            writer.newLine(); 
+    	        }
+    	        System.out.println("Product list saved successfully.");
+    	    } catch (IOException e) {
+    	        System.err.println("Error saving product list: " + e.getMessage());
+    	    }
+    	}*/
+    	  productList.saveList("productList2.csv");
+    	  /*try (BufferedWriter writer = new BufferedWriter(new FileWriter("productList.csv"))) {
+    	        // Write the CSV header
+    	        writer.write("ID,Name,Category,SubCategory,ImageURL,Link,Rating,NumberOfRatings,DiscountPrice,ActualPrice");
+    	        writer.newLine();
+    	        // Iterate over the bestsellers list
+
+    	        for (AmazonProduct product : productList.getBestSellers()) {
+    	            writer.write(String.join(",", 
+    	                String.valueOf(product.getId()),
+    	                product.getName(),
+    	                product.getMain_category().getCategory(),
+    	                product.getSub_category().getSubCategory(),
+    	                product.getImageURL(),
+    	                product.getLink(),
+    	                String.valueOf(product.getRating()),
+    	                String.valueOf(product.getNRatings()),
+    	                String.valueOf(product.getDiscountPrice()),
+    	                String.valueOf(product.getActualPrice())
+    	            ));
+    	            writer.newLine(); 
+    	        }
+
+    	        System.out.println("Product list saved successfully.");
+    	    } catch (IOException e) {
+    	        System.err.println("Error saving product list: " + e.getMessage());
+    	    }*/
+    	}
+    
 
     public static void search() throws AmazonProductException{
         System.out.print("Enter the product name to search: ");
