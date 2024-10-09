@@ -40,10 +40,8 @@ public class AmazonProductList extends AmazonProductUtil{
                 writer.newLine();
             }
 
-
- 
             for (AmazonProduct product : bestsellers) {
-                String productData = product.getId() + "," + product.getName() + "," +
+                String productData = "\"" + product.getId() + "\"" + "," + product.getName() + "," +
                         product.getMain_category().getCategory() + "," +
                         product.getSub_category().getSubCategory() + "," +
                         product.getImageURL() + "," + product.getLink() + "," +
