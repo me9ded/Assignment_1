@@ -1,3 +1,11 @@
+/*
+ * Students Names: Fouzi Haidar & Mohamed Amine Jmal
+ * Student Number: 041157806 &     041138938
+ * Professor Name: Paulo Sousa
+ * Assignment 1
+ * Description: Read the CSV, create proper classes, exception
+handling, packages as well as perform operations using Collections (ArrayList), that
+includes inclusion, edition, deletion and searching.*/
 package amazonproducts;
 import java.util.Scanner;
 import java.io.*;
@@ -41,15 +49,23 @@ public class AmazonProductList extends AmazonProductUtil{
             }
 
             for (AmazonProduct product : bestsellers) {
-                String productData = "\"" + product.getId() + "\"" + "," + product.getName() + "," +
-                        product.getMain_category().getCategory() + "," +
-                        product.getSub_category().getSubCategory() + "," +
-                        product.getImageURL() + "," + product.getLink() + "," +
-                        product.getRating() + "," + product.getNRatings() + "," +
-                        product.getDiscountPrice() + "," + product.getActualPrice();
-                writer.write(productData);
-                writer.newLine();
-            }
+                StringBuilder productData = new StringBuilder();
+                productData.append("\"").append(product.getId()).append("\",");
+                productData.append("\"").append(product.getName()).append("\",");
+                productData.append("\"").append(product.getMain_category().getCategory()).append("\",");
+                productData.append("\"").append(product.getSub_category().getSubCategory()).append("\",");
+                productData.append("\"").append(product.getImageURL()).append("\",");
+                productData.append("\"").append(product.getLink()).append("\",");
+                productData.append("\"").append(product.getRating()).append("\",");
+                productData.append("\"").append(product.getNRatings()).append("\",");
+                productData.append("\"").append(product.getDiscountPrice()).append("\",");
+                productData.append("\"").append(product.getActualPrice()).append("\"");
+
+                writer.write(productData.toString());
+                writer.newLine();              
+                }
+
+            writer.flush();  
         } catch (IOException e) {
             throw new AmazonProductException("There was an error in saving the file.");
         }
@@ -61,7 +77,7 @@ public class AmazonProductList extends AmazonProductUtil{
 
     public void printList(){
         for (AmazonProduct product : bestsellers) {
-            System.out.println(product);
+            System.out.println(product.toString());
         }
     }
 
@@ -70,6 +86,7 @@ public class AmazonProductList extends AmazonProductUtil{
     		throw new AmazonProductException("Invalid position");
     	}
     	bestsellers.set(pos, product);
+    	
     }
 
     public void add(AmazonProduct product) throws AmazonProductException{
@@ -87,12 +104,18 @@ public class AmazonProductList extends AmazonProductUtil{
     	}
     	return bestsellers.get(pos);
     }
-    public void search(String data) {
-        for (AmazonProduct product : bestsellers) {
-            if (product.getName().toLowerCase().contains(data.toLowerCase())) {
-                System.out.println(product); 
-            }
-        }
+    public void search(String data){
+    	while(data.isEmpty()) {
+    		System.out.println("Error data cannot be empty");
+    		break;
+    	}
+    	if(!data.isEmpty()) {
+    		for (AmazonProduct product : bestsellers) {
+    			if (product.getName().toLowerCase().contains(data.toLowerCase())) {
+    				System.out.println(product); 
+    			}
+    		}
+    	}
     	
     }
     public int size() {
