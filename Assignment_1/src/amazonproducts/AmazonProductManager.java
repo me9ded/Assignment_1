@@ -1,6 +1,13 @@
+/*
+ * Students Names: Fouzi Haidar & Mohamed Amine Jmal
+ * Student Number: 041157806 &     041138938
+ * Professor Name: Paulo Sousa
+ * Assignment 1
+ * Description: Read the CSV, create proper classes, exception
+handling, packages as well as perform operations using Collections (ArrayList), that
+includes inclusion, edition, deletion and searching.*/
 package amazonproducts;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -77,6 +84,7 @@ public class AmazonProductManager {
 
         public static void exit() {
         	System.out.println("Exiting...");
+        	System.out.println("Program done by : Fouzi Haider and Mohamed amine jmal");
     }
 
 
@@ -93,10 +101,10 @@ public class AmazonProductManager {
         System.out.println("Displaying product list...");
     }
 
-
     public static void addProduct() throws AmazonProductException {
     	 	int id = getInt("ID: ");
     	    String name = getString("Name: ");
+    	    input.nextLine();
     	    AmazonProductCategory category = new AmazonProductCategory(getString("Category: "));
     	    AmazonProductSubCategory subCategory = new AmazonProductSubCategory(getString("Sub-category: "), category);
     	    String imageURL = getString("Image URL: ");
@@ -160,66 +168,26 @@ public class AmazonProductManager {
     }
 
       public static void saveProductList() throws AmazonProductException {
-    	  /*try (BufferedWriter writer = new BufferedWriter(new FileWriter("productList.csv"))) {
-    	        writer.write("ID,Name,Category,SubCategory,ImageURL,Link,Rating,NumberOfRatings,DiscountPrice,ActualPrice");
-    	        writer.newLine(); 
-    	        
-    	        for () {
-    	            writer.write(String.join(",", 
-    	                String.valueOf(product.getId()),
-    	                product.getName(),
-    	                product.getMain_category().getCategory(),
-    	                product.getSub_category().getSubCategory(),
-    	                product.getImageURL(),
-    	                product.getLink(),
-    	                String.valueOf(product.getRating()),
-    	                String.valueOf(product.getNRatings()),
-    	                String.valueOf(product.getDiscountPrice()),
-    	                String.valueOf(product.getActualPrice())
-    	            ));
-    	            writer.newLine(); 
-    	        }
-    	        System.out.println("Product list saved successfully.");
-    	    } catch (IOException e) {
-    	        System.err.println("Error saving product list: " + e.getMessage());
-    	    }
-    	}*/
+   
     	  productList.saveList("productList2.csv");
-    	  /*try (BufferedWriter writer = new BufferedWriter(new FileWriter("productList.csv"))) {
-    	        // Write the CSV header
-    	        writer.write("ID,Name,Category,SubCategory,ImageURL,Link,Rating,NumberOfRatings,DiscountPrice,ActualPrice");
-    	        writer.newLine();
-    	        // Iterate over the bestsellers list
+      }
+    public static void search(){
+//    	try {
+//            System.out.print("Enter the product name to search: ");
+//            input.nextLine();
+//            String keyword = input.nextLine();
+//            productList.search(keyword);
+//            System.out.println("A moment it is searching in the product list...");
+//    	}catch (AmazonProductException e){
+//            System.err.println("AmazonProductException: " + e.getMessage());
+//
+//    	}
+    	System.out.println("Enter the product name to search: ");
+       input.nextLine();
+       String keyword = input.nextLine();
+       productList.search(keyword);
+    	
 
-    	        for (AmazonProduct product : productList.getBestSellers()) {
-    	            writer.write(String.join(",", 
-    	                String.valueOf(product.getId()),
-    	                product.getName(),
-    	                product.getMain_category().getCategory(),
-    	                product.getSub_category().getSubCategory(),
-    	                product.getImageURL(),
-    	                product.getLink(),
-    	                String.valueOf(product.getRating()),
-    	                String.valueOf(product.getNRatings()),
-    	                String.valueOf(product.getDiscountPrice()),
-    	                String.valueOf(product.getActualPrice())
-    	            ));
-    	            writer.newLine(); 
-    	        }
-
-    	        System.out.println("Product list saved successfully.");
-    	    } catch (IOException e) {
-    	        System.err.println("Error saving product list: " + e.getMessage());
-    	    }*/
-    	}
-    
-
-    public static void search() throws AmazonProductException{
-        System.out.print("Enter the product name to search: ");
-        input.nextLine();
-        String keyword = input.nextLine();
-        productList.search(keyword);
-        System.out.println("A moment it is searching in the product list...");
     }
     
 
