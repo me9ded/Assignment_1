@@ -124,6 +124,8 @@ public class AmazonProduct extends AmazonProductUtil{
         return "AmazonProduct{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", Category=" + category.getCategory() +'\''+
+                ", SubCtegory="+ subCategory.getSubCategory()+'\''+
                 ", imageURL='" + imageURL + '\'' +
                 ", link='" + link + '\'' +
                 ", nRatings=" + nRatings +

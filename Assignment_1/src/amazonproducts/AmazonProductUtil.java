@@ -11,7 +11,7 @@ public class AmazonProductUtil{
 	private static int NUMCOLS=10;
 
 	public static float convertStrToFloat(String str) {
-		//if there is a special charecter then we substring it if there isnt then parse the entire str
+		//if there is a special charecter then we substring it if there isn't then parse the entire string
 		str=str.substring(1, str.length());
         try {
             return Float.parseFloat(str);
